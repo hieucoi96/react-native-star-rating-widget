@@ -20,6 +20,7 @@
         "star rating"
     ],
     "scripts": {
+        "build": "rm -rf built && tsc",
         "prepare": "bob build",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "test": "jest"

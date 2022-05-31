@@ -7,6 +7,7 @@ import {
     ViewStyle,
     Animated,
     Easing,
+    LayoutChangeEvent,
 } from "react-native";
 import StarIcon from "./StarIcon";
 import { getStars } from "./utils";
@@ -101,10 +102,12 @@ const StarRating: React.FC<StarRatingProps> = ({
             ref={ref}
             style={[styles.starRating, style]}
             {...panResponder.panHandlers}
-            onLayout={() => {
-                if (ref.current) {
-                    ref.current.measure((_x, _y, w, _h) => (width.current = w));
-                }
+            onLayout={({
+                nativeEvent: {
+                    layout: { width: w },
+                },
+            }: LayoutChangeEvent) => {
+                width.current = w;
             }}
             testID={testID}>
             {getStars(rating, maxStars).map((starType, i) => {
